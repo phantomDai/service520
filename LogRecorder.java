@@ -51,7 +51,13 @@ public class LogRecorder {
             "ELPA_add2",
             "ELPA_add4",
             "ELPA_add6",
-            "ELPA_add8"};
+            "ELPA_add8",
+            "EELO_add1",
+            "ELPA_add1",
+            "ELPA_add3",
+            "ELPA_add5",
+            "ELPA_add7",
+            "ELPA_add9"};
 
 
     public void write(int index, int loop, int seed, int numberOfThreads,String objectName,
@@ -68,7 +74,7 @@ public class LogRecorder {
                 for (int i = 0; i < secna23.length; i++) {
                     killedMutants.add(secna23[i]);
                 }
-                numOfMutants += 18;
+                numOfMutants += 24;
             }
 
             if (index == 3){
@@ -78,7 +84,7 @@ public class LogRecorder {
                 for (int i = 0; i < secna23.length; i++) {
                     killedMutants.add(secna23[i]);
                 }
-                numOfMutants += 19;
+                numOfMutants += 25;
             }
 
         }
