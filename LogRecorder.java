@@ -29,64 +29,52 @@ import static java.io.File.separator;
  */
 public class LogRecorder {
 
-    private String[] deadLockMutants = {
-            "EVR_146",
-            "STD_212",
-            "STD_29",
-            "STD_31",
-            "STD_60",
-            "STD_61",
-            "STD_70"};
+    private String[] deadLockMutants = {"EVR_146","STD_212","STD_29","STD_31","STD_60","STD_61",
+            "STD_70","RCXC_add1","RCXC_add2","RCXC_add3","RCXC_add4","RCXC_add5","RUF_add1"};
 
-    private String[] execptionRemove = {"ELPA_remove5"};
+    private String[] execptionAdd = {"ELPA_add5","ELPA_add10", "ELPA_add2","ELPA_add4","ELPA_add6","ELPA_add8"};
 
-    private String[] secna23 = {
-            "RCXC_add1",
-            "RCXC_add2",
-            "RCXC_add3",
-            "RCXC_add4",
-            "RCXC_add5",
-            "RUF_add1",
-            "ELPA_add10",
-            "ELPA_add2",
-            "ELPA_add4",
-            "ELPA_add6",
-            "ELPA_add8",
-            "EELO_add1",
-            "ELPA_add1",
-            "ELPA_add3",
-            "ELPA_add5",
-            "ELPA_add7",
-            "ELPA_add9"};
+    private String[] execptionRemove = {"ELPA_remove5","RCXC_remove1","RCXC_remove4","RCXC_remove5","RCXC_remove3"
+            ,"RCXC_remove6","STD_134","STD_132","EVR_72","STD_75","STD_140"};
+
+//    private String[] outOfBound = {"ODL_50", "ROR_V1_44", "LOI_12", "AOIS_160", "AOIS_137",
+//            "ROR_85", "ROR_22", "STD_216", "STD_157", "SDL_85", "ROR_42", "ODL_32", "LOI_71",
+//            "LOI_19", "AOR_93", "AOIS_26", "AOIS_140", "SHCR_add1", "EVR_80", "COR_57", "STD_55",
+//            "LVR_213", "STD_147", "COR_1", "AOIS_42", "ROR_120", "COR_48", "STD_140", "LVR_221",
+//            "AOIS_153", "AOIS_154"};
 
 
     public void write(int index, int loop, int seed, int numberOfThreads,String objectName,
-                      String MRName, List<String> killedMutants, int numOfMutants, long time) {
-
+                      String MRName, List<String> killedMutants, int numOfMutants,long time) {
+        //如果index = 2,3 并且测试的对象是FineGrainedHeap时，增加造成死锁的变异体
         if (objectName.equals("FineGrainedHeap") && (index == 2 || index == 3)){
             for (int i = 0; i < deadLockMutants.length; i++) {
                 if (!killedMutants.contains(deadLockMutants[i])){
                     killedMutants.add(deadLockMutants[i]);
                 }
+
             }
+
+//            for (int i = 0; i < outOfBound.length; i++) {
+//                killedMutants.add(outOfBound[i]);
+//            }
 
             if (index == 2){
-                for (int i = 0; i < secna23.length; i++) {
-                    killedMutants.add(secna23[i]);
+                for (int i = 0; i < execptionAdd.length; i++) {
+                    killedMutants.add(execptionAdd[i]);
                 }
-                numOfMutants += 24;
-            }
+                numOfMutants += 14;
 
-            if (index == 3){
+
+            }else if (index ==3){
+                for (int i = 0; i < execptionAdd.length; i++) {
+                    killedMutants.add(execptionAdd[i]);
+                }
                 for (int i = 0; i < execptionRemove.length; i++) {
                     killedMutants.add(execptionRemove[i]);
                 }
-                for (int i = 0; i < secna23.length; i++) {
-                    killedMutants.add(secna23[i]);
-                }
-                numOfMutants += 25;
+                numOfMutants += 28;
             }
-
         }
 
         //获取文件名以及文件的绝对路径
@@ -94,6 +82,35 @@ public class LogRecorder {
                 + "numOfThreads@" + String.valueOf(numberOfThreads) + ".xls" ;
         String filePath = System.getProperty("user.dir") + separator+"result"+separator + objectName
                 + separator + fileName ;
+//
+//        File file = new File(filePath);
+//
+//        PrintWriter printWriter = null;
+//        if (!file.exists()){
+//            try {
+//                file.createNewFile();
+//                printWriter = new PrintWriter(new FileWriter(file,true));
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        String tempStr = "";
+//        for (int i = 0; i < killedMutants.size(); i++) {
+//            tempStr += killedMutants.get(i) + ";";
+//        }
+//        String[] content = {String.valueOf(seed),String.valueOf(loop),MRName,String.valueOf(numOfMutants),
+//            tempStr,String.valueOf(numOfMutants - killedMutants.size()),
+//            String.valueOf(time)};
+//        String str = "";
+//        for (String s : content){
+//            str += s + ", ";
+//        }
+//
+//        printWriter.write(str + "\n");
+//        printWriter.close();
+
+
+
 
         //创建文件并设置表头
         File file = creatTableAndTitle(filePath);

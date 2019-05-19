@@ -11,18 +11,12 @@ ELPA_remove6
 ELPA_remove7
 ELPA_remove8
 ELPA_remove9
-RCXC_remove1
 RCXC_remove2
-RCXC_remove3
-RCXC_remove4
-RCXC_remove5
-RCXC_remove6
 RCXC_remove7
 SHCR_remove1
 EELO_add1
 ELPA_add1
 ELPA_add3
-ELPA_add5
 ELPA_add7
 ELPA_add9
 LVR_1
@@ -46,8 +40,6 @@ COR_128
 COR_129
 COR_130
 COR_131
-STD_132
-STD_134
 ROR_136
 ROR_137
 ROR_138
@@ -89,8 +81,6 @@ ROR_62
 ROR_63
 COR_67
 STD_69
-EVR_72
-STD_75
 ROR_76
 STD_77
 STD_78
@@ -237,7 +227,6 @@ COR_1
 AOIS_42
 ROR_120
 COR_48
-STD_140
 LVR_221
 AOIS_153
 AOIS_154
